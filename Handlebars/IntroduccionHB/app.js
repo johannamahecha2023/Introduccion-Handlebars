@@ -9,6 +9,7 @@ var usersRouter = require('./routes/users');
 const docenteRouter = require('./routes/docente');
 const perfilRouter = require('./routes/perfil');
 const loginRouter = require('./routes/login');
+const mascotasRouter = require('./routes/mascotas');
 var app = express();
 
 // view engine setup
@@ -26,6 +27,7 @@ app.use('/users', usersRouter);
 app.use('/docente', docenteRouter);
 app.use('/perfil', perfilRouter);
 app.use('/login', loginRouter)
+app.use('/mascotas', mascotasRouter)
 
 
 

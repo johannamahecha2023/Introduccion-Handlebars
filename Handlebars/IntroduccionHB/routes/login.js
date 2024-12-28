@@ -7,11 +7,11 @@ router.get('/',(req,res)=>{
 router.post('/validacion',(req,res)=>{
     const username=req.body.user
     const password=req.body.pass
-    if(username== 'desarrolladora'&& password=='backend1234'){
-        res.redirect('/users')
+    if(username== 'veterinario'&& password=='1234'){
+        res.redirect('/mascotas')
     }
     else{
         res.render('login', {mensaje:'credenciales incorrectas', error:true})
     }
 })
-module.exports=router
+module.exports=router;
