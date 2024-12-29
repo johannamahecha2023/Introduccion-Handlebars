@@ -3,6 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+//importando handlebars para crear los helpers
+const {create}=require('express-handlebars')
+// importando moment para poder utilizarlo
+const moment=require('moment')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -12,9 +16,29 @@ const loginRouter = require('./routes/login');
 const mascotasRouter = require('./routes/mascotas');
 var app = express();
 
+//configuracion de express con handlebars para crear los helpers
+const hbs=create({
+  //Establecemos la extension de handlebars para los archivod que es .hbs
+  extname:'.hbs',
+  //Creacion de helpers
+  helpers: {
+    saludo: function(nombre){
+      return `hola ${nombre}`
+    },
+    mayuscula: function(texto){
+      return texto.toUpperCase();
+    }
+  }
+})
+
+/* Segundo metodo */
+hbs.handlebars.registerHelper('formatoFecha',function(fecha){
+  return moment(fecha).format('YYYY-MM-DD')
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.engine('.hbs',hbs.engine)
 
 app.use(logger('dev'));
 app.use(express.json());
